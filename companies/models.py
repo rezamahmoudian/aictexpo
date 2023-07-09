@@ -3,6 +3,16 @@ from django.contrib.auth import get_user_model
 
 
 # Create your models here.
+class CompanyCategory(models.Model):
+    title = models.CharField(max_length=200, verbose_name='عنوان دسته')
+    slug = models.CharField(max_length=100, unique=True, verbose_name='آدرس دسته')
+    status = models.BooleanField(default=True, verbose_name='نمایش دادن')
+
+    class Meta:
+        verbose_name = 'دسته بندی'
+        verbose_name_plural = 'دسته بندی ها'
+
+
 class Company(models.Model):
     name = models.CharField(max_length=200, null=True, verbose_name='عنوان شرکت')
     about = models.TextField(verbose_name='درباره شرکت', blank=True, null=True)
@@ -20,5 +30,13 @@ class Company(models.Model):
     address = models.TextField(verbose_name="آدرس", null=True, blank=True)
     certificates = models.FileField(null=True, blank=True)
     show_baner = models.BooleanField(verbose_name="نمایش بنر")
-    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name="نویسنده")
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name="نویسنده", related_name="author")
+    category = models.ManyToManyField(CompanyCategory, verbose_name='دسته بندی', related_name="category")
+
+    class Meta:
+        verbose_name = 'شرکت'
+        verbose_name_plural = 'شرکت ها'
+
+
+
 
