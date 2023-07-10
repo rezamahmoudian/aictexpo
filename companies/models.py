@@ -42,6 +42,9 @@ class Company(models.Model):
         verbose_name = 'شرکت'
         verbose_name_plural = 'شرکت ها'
 
+    def __str__(self):
+        return self.name
+
 
 class ProductCategory(models.Model):
     title = models.CharField(max_length=200, verbose_name='عنوان دسته بندی محصول')
@@ -59,18 +62,18 @@ class ProductCategory(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=200, verbose_name='نام محصول')
     slug = models.CharField(max_length=100, unique=True, verbose_name='slug')
-    model = models.CharField(max_length=200, verbose_name='مدل محصول')
+    model = models.CharField(max_length=200, null=True, blank=True, verbose_name='مدل محصول')
     description = models.TextField(verbose_name='توضیحات محصول', blank=True, null=True)
     short_description = models.TextField(verbose_name='توضیحات کوتاه محصول', blank=True, null=True)
-    gallery = models.FileField()
+    gallery = models.FileField(null=True, blank=True,)
     catalog = models.FileField(upload_to='', null=True, blank=True, verbose_name='کاتالوگ محصول')
     catalog_cover = models.ImageField(upload_to="images", null=True, blank=True, verbose_name="جلد کاتالوگ محصول")
     video = models.FileField(upload_to='media/video', null=True, blank=True)
     show_sertificates = models.BooleanField(verbose_name="نمایش گواهی نامه های شرکت")
-    first_feature = models.CharField(max_length=200, verbose_name='ویژگی اول محصول')
-    second_feature = models.CharField(max_length=200, verbose_name='ویژگی دوم محصول')
-    third_feature = models.CharField(max_length=200, verbose_name='ویژگی سوم محصول')
+    first_feature = models.CharField(max_length=200, null=True, blank=True, verbose_name='ویژگی اول محصول')
+    second_feature = models.CharField(max_length=200, null=True, blank=True, verbose_name='ویژگی دوم محصول')
+    third_feature = models.CharField(max_length=200, null=True, blank=True, verbose_name='ویژگی سوم محصول')
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name="نویسنده",
                                related_name="product_author")
     company = models.ForeignKey(Company, verbose_name='نام شرکت', on_delete=models.CASCADE, related_name='product_company')
-    category = models.ManyToManyField(ProductCategory, verbose_name='دسته بندی محصول', related_name="product_category")
+    category = models.ManyToManyField(ProductCategory, null=True, blank=True, verbose_name='دسته بندی محصول', related_name="product_category")

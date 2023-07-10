@@ -15,3 +15,4 @@ class CompanyCreateListView(ListCreateAPIView):
 class ProductCreateListView(ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
