@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class CompanyCategory(models.Model):
@@ -53,7 +53,7 @@ class ProductCategory(models.Model):
 
     class Meta:
         verbose_name = 'دسته بندی محصول'
-        verbose_name_plural = 'دسته بندی های محصولات'
+        verbose_name_plural = 'دسته بندی محصولات'
 
     def __str__(self):
         return self.title
