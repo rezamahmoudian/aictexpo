@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 
+
 # Create your models here.
 class CompanyCategory(models.Model):
     title = models.CharField(max_length=200, verbose_name='عنوان دسته')
@@ -36,7 +37,7 @@ class Company(models.Model):
     certificates = models.FileField(null=True, blank=True)
     show_baner = models.BooleanField(verbose_name="نمایش بنر")
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name="نویسنده", related_name="author")
-    category = models.ManyToManyField(CompanyCategory, verbose_name='دسته بندی', related_name="category")
+    category = models.ManyToManyField(CompanyCategory, blank=True, verbose_name='دسته بندی', related_name="category")
 
     class Meta:
         verbose_name = 'شرکت'
@@ -76,4 +77,4 @@ class Product(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name="نویسنده",
                                related_name="product_author")
     company = models.ForeignKey(Company, verbose_name='نام شرکت', on_delete=models.CASCADE, related_name='product_company')
-    category = models.ManyToManyField(ProductCategory, null=True, blank=True, verbose_name='دسته بندی محصول', related_name="product_category")
+    category = models.ManyToManyField(ProductCategory, blank=True, verbose_name='دسته بندی محصول', related_name="product_category")

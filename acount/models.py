@@ -7,7 +7,7 @@ from django.utils.html import format_html
 class User(AbstractUser):
     email = models.EmailField(unique=True, verbose_name="ایمیل")
     is_author = models.BooleanField(default=False, verbose_name='وضعیت نویسندگی')
-    profile_img = models.ImageField(upload_to="images", default="images/avatar5.png", verbose_name='عکس پروفایل')
+    profile_img = models.ImageField(upload_to="images", default="media/images/avatar5.png", verbose_name='عکس پروفایل')
     author_request = models.BooleanField(default=False, verbose_name='درخواست نویسندگی')
 
     # vip_user = models.DateTimeField(default=timezone.now, verbose_name='کاربر وی آی پی تا')

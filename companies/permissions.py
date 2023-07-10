@@ -13,3 +13,16 @@ class IsAuthorOrReadOnly(BasePermission):
             return True
         else:
             return False
+
+
+class IsStaffOrReadOnly(BasePermission):
+
+    def has_permission(self, request, view):
+        if request.user and request.user.is_staff:
+            return True
+
+        elif request.method in SAFE_METHODS:
+            return True
+
+        else:
+            return False
