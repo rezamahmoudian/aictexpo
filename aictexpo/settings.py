@@ -38,10 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'companies',
+    # 'companies',
+    'companies.apps.CompaniesConfig',
     'rest_framework',
     'rest_framework.authtoken',
-    'acount',
+    # 'acount',
+    'acount.apps.AcountConfig',
+    'rest_framework_swagger',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -147,3 +151,7 @@ REST_FRAMEWORK = {
 
 
 AUTH_USER_MODEL = 'acount.User'
+
+SWAGGER_SETTINGS = {
+    'VALIDATOR_URL': 'http://localhost:8189',
+}
